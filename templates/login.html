@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="globals.css" />
+    <link rel="stylesheet" href="styleguide.css" />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+  </head>
+  <body>
+    <div class="login">
+      <div class="doble-fondo">
+        <div class="registro-or-log-ing">
+          <form method="post">
+            {% csrf_token %}
+          <div class="welcome-phrase"><div class="text-wrapper">Login</div></div>
+          <div class="email">
+            <div class="email"><input class="div" placeholder="Username" name="username" type="text" /></div>
+          </div>
+          <div class="email"><input class="div" placeholder="Password" name="password" type="password" /></div>
+          <div class="create-account">
+         <div class="log-in"><div class="text-wrapper-3"> <button type='submit'>Log In</button></div></div>
+          </div>
+        </form>
+          <div class="frame">
+            <div class="div-wrapper"><div class="text-wrapper-4">Forgot Password?</div></div>
+            <p class="you-do-not-have">
+              <span class="span">You do not have account yet?</span>
+              <span class="text-wrapper-5">&nbsp;</span>
+             <a href="../signup/index.html"><span class="text-wrapper-6">Sign In</span></a> 
+            </p>
+          </div>
+        </div>
+        <div class="group">
+          <div class="group-2">
+            <div class="text-wrapper-7">Scrapify</div>
+            <img class="asset" src="{% static 'img/asset-21-2.svg' %}" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

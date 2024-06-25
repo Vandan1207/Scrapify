@@ -1,0 +1,55 @@
+{% extends "master.html" %}
+{% load static %}
+{% block content %}
+    <div class="pagetitle">
+      <h1>Show Category</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item">Manage Categories</li>
+          <li class="breadcrumb-item active">Show Categories</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section">
+      <div class="row">
+        <div class="col-lg-6">
+
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Categories</h5>
+
+              <!-- Default Table -->
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Action</th>
+
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for xy in data %}
+                  <tr>
+                    <th scope="row">{{forloop.counter}}</th>
+                    <td>{{xy.name}}</td> 
+                    <td>
+                       <button type="submit"> <a href= "{% url 'editview' xy.id  %}">Edit</a></button> 
+                       <button type="submit"><a href="{% url 'deleteview' xy.id %}">Delete</a></button>
+                    </td>     
+                  {% endfor %}
+
+                  </tr> 
+                  </tbody>
+                </table>
+
+                </table>
+              <!-- End Default Table Example -->
+            </div>
+          </div>
+
+    </section>
+
+ {% endblock %}

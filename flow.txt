@@ -1,0 +1,45 @@
+the flow of each entity are as follows
+ADMIN
+manage category--> admin can manage category like paper plastic and all
+manage item(Sub Category)--> each item in a category such as in paper their are used paper, newspaper, book paper can manage them and also set a price for them per kg
+add delivery boy-->
+manage deliveryboy
+manage customer--> inactive && active
+manage scrapper--> user buys and will be shown in scrapper
+manage slot--> date && Time --> will be shown to user dynamic
+
+ 		ERRORS
+
+	SHOP IN  DELIVERYBOY
+
+
+
+ADMINN APP LEFT
+1.SCRAPPER
+2.DELIVERY BOY
+3. CUSTOMER
+4.
+
+---------------
+admin can see total number of user
+#admin can see the scaper(total order)
+thank you page ma my orders in link(if time)
+change passoword for dilveryboy(if time)
+use of active functionality in my orders
+completed orders ni ek functionality 
+coustomer ne your orders ma aana previous order dekhase
+#user field in placeorder ma all user dekhay che rather than the users that only accepted by that perticular deliveryboy
+#after placing order -- first deliveryboy ke orderlist me sa remove , second customerapp ma my orders ma completed, third admin app ko total number of orders 
+
+
+ user.is_staff=True  # mukavanu
+
+
+Product
+
+
+
+----------QUESTION ------
+WHERE IS THE USE OF DBMS IN THE PROJECT
+
+

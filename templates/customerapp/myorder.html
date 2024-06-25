@@ -1,0 +1,98 @@
+{% load static %}
+
+<html lang="en">
+  <head>
+  	<title>Scrapify</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,700' rel='stylesheet' type='text/css'>
+
+	<link rel="stylesheet" href="{% static 'table/https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'%}">
+	
+	<link rel="stylesheet" href="{% static 'table/css/style.css'%}">
+
+	</head>
+	<body>
+		
+	<section class="ftco-section">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-md-6 text-center mb-12">
+					<h2 class="heading-section">Delivery Boy Status</h2>
+					
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<div class="table-wrap">
+						<table class="table table-responsive-xl">
+						  <thead>
+						    <tr>
+						    	<th>ID</th>
+						      <th>Deliveryboy Name</th>
+						      <th>Status</th>
+						      <th>Deliveryboy Photo</th>
+						      <th>Deliveryboy Phone Number</th>
+							  <th>Your Approx Weight</th>
+
+						    </tr>
+						  </thead>
+						  <tbody>
+                {% for xy in data %}
+                
+						    <tr class="alert" role="alert">
+						    	<td scope="row">
+						    		{{forloop.counter}}
+						    	</td>
+						      <td class="d-flex align-items-center">
+						      	<div class="pl-3 email">
+						      		<span>{{xy.deliveryboy.name}}</span>
+						      		<span></span>	
+						      	</div>
+						      </td>
+						      <td class="status"><span class="active">Active</span></td>
+
+						      <td>
+						      	<img src="{{xy.deliveryboy.image.url}}" style="height:50px; ">
+				        	</td>
+							<td>{{xy.deliveryboy.phonenumber}}</td>
+							<td>{{xy.checkout.approxweight}}  KG</td>
+
+                  {% endfor %}
+						
+				  
+						  </tbody>
+						
+						
+						</table>
+				
+						
+					</div>
+			
+				</div>
+			
+				
+			</div>
+
+		
+		</div>
+		<section class="ftco-section">
+			<div class="container">
+				<div class="row justify-content-center">
+					<div class="col-md-6 text-center mb-12">
+						<h2 class="heading-section"><a href="{% url 'homepage' %}">Home<a></h2>
+						
+					</div>
+				</div>
+
+		
+	</section>
+
+	<script src="{% static 'table/js/jquery.min.js'%}"></script>
+  <script src="{%static 'table/js/popper.js'%}"></script>
+  <script src="{%static 'table/js/bootstrap.min.js'%}"></script>
+  <script src="{% static 'table/js/main.js'%}"></script>
+
+	</body>
+</html>

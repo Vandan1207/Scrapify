@@ -1,0 +1,186 @@
+{% extends "deliveryboyapp/master.html" %}
+{% load static  %}
+{% block content  %}
+{% load cart_tag %}
+<!-- Include jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+	<!-- breadcrumb-section -->
+	<div class="breadcrumb-section breadcrumb-bg">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8 offset-lg-2 text-center">
+					<div class="breadcrumb-text">
+						<p>Fresh and Organic</p>
+						<h1>Cart</h1>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end breadcrumb section -->
+
+	<!-- cart -->
+	<div class="cart-section mt-150 mb-150">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8 col-md-12">
+					<div class="cart-table-wrap">
+						<table class="cart-table">
+							<thead class="cart-table-head">
+								<tr class="table-head-row">
+									<th class="product-remove"><a href="{% url 'cart_clear' %}"><i class="fa fa-trash"></i></a></th>
+									<th class="product-image">Product Image</th>
+									<th class="product-name">Name</th>
+									<th class="product-price">Price</th>
+									<th class="product-quantity">Quantity</th>
+									<th class="product-total">Total</th>
+								</tr>
+							</thead>
+							<tbody>
+								{% for key,value in request.session.cart.items %}
+								<tr class="table-body-row">
+									<td class="product-remove"><a href="{% url 'item_clear' key %}"><i class="far fa-window-close"></i></a></td>
+									<td class="product-image"><img src="{{value.image}}" alt=""></td>
+									<td class="product-name">{{value.name}} </td>
+									<td class="product-price">Rs.{{value.price}}</td>
+									{% comment %} <td class="product-quantity"><input type="number" placeholder="0"></td> {% endcomment %}
+									<td class="cart_quantity">
+											<div class="cart_quantity_button">
+										   <a class="cart_quantity_up" href="/deliveryboyapp/cart/item_increment/{{value.product_id}}/"> + </a>
+										   <input class="cart_quantity_input" type="text" name="quantity" value="{{value.quantity}}" autocomplete="off" size="2">
+										   <a class="cart_quantity_down" href="/deliveryboyapp/cart/item_decrement/{{value.product_id}}/"> - </a>
+										</div>
+									 </td>
+									<td class="product-total">1</td>
+								</tr>
+								{% endfor %}
+							</tbody>
+						</table>
+					</div>
+				</div>
+
+				<div class="col-lg-4">
+					<div class="total-section">
+						<table class="total-table">
+							<thead class="total-table-head">
+								<tr class="table-total-row">
+									<th>Total</th>
+									<th>Price</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr class="total-data">
+									<td><strong>Subtotal: </strong></td>
+									<td id="subtotal">Rs.500.00</td>
+								</tr>
+								<tr class="total-data">
+									<td><strong>GST: </strong></td>
+									<td id="gst">Rs.45.00</td>
+								</tr>
+								<tr class="total-data">
+									<td><strong>Total: </strong></td>
+									<td id="final-total">Rs.545.00</td>
+								</tr>
+							</tbody>
+						</table>
+						<div class="cart-buttons">
+							<a href="{% url 'addshop' %}" class="boxed-btn">Shop</a>
+							{% comment %} <a href="{% url 'checkouts' %}" class="boxed-btn black">Check Out</a> {% endcomment %}
+							<a href="{% url 'request' %}" class="boxed-btn black" id="checkout-btn">Check Out</button></a>
+
+						</div>
+					</div>
+					</div>
+			</div>
+		</div>
+	</div>
+	<!-- end cart -->
+
+
+<script>
+	function updateCart() {
+	  var cartRows = document.getElementsByClassName('table-body-row');
+	  
+	  var subtotal = 0;
+  
+	  for (var i = 0; i < cartRows.length; i++) {
+		var row = cartRows[i];
+		
+		var price = parseFloat(row.getElementsByClassName('product-price')[0].innerText.replace('Rs.', ''));
+		var quantity = parseInt(row.getElementsByClassName('cart_quantity_input')[0].value);
+  
+		row.getElementsByClassName('product-total')[0].innerText = quantity;
+  
+		subtotal += price * quantity;
+	  }
+  
+	  var gstRate = 0.18;
+	  var gst = subtotal * gstRate;
+  
+	  var finalTotal = subtotal - gst;
+  
+	  document.getElementById('subtotal').innerText = 'Rs.' + subtotal.toFixed(2);
+	  document.getElementById('gst').innerText = 'Rs.' + gst.toFixed(2);
+	  document.getElementById('final-total').innerText = 'Rs.' + finalTotal.toFixed(2);
+	}
+  
+	var quantityInputs = document.getElementsByClassName('cart_quantity_input');
+	for (var i = 0; i < quantityInputs.length; i++) {
+	  var input = quantityInputs[i];
+	  input.addEventListener('change', updateCart);
+	}
+  
+	updateCart();
+  </script>
+{% comment %} ------------- AJAX to send data to views------------------------- {% endcomment %}
+<script>
+	$(document).ready(function() {
+	  $('#checkout-btn').on('click', function(e) {
+		e.preventDefault();
+  
+		var products = [];
+		var cartRows = document.getElementsByClassName('table-body-row');
+  
+		for (var i = 0; i < cartRows.length; i++) {
+		  var row = cartRows[i];
+		  var productName = row.getElementsByClassName('product-name')[0].innerText;
+		  var quantity = parseInt(row.getElementsByClassName('cart_quantity_input')[0].value);
+		  
+		  var subtotal = parseFloat(row.getElementsByClassName('product-price')[0].innerText.replace('Rs.', '')) * quantity;
+
+		  products.push({
+			name: productName,
+			quantity: quantity,
+			subtotal: subtotal,
+		  });
+		}
+
+		var totalSubtotal = products.reduce(function (acc, product) {
+			return acc + product.subtotal;
+		}, 0);
+  
+		var data = {
+		  products: JSON.stringify(products), 
+		  totalSubtotal: totalSubtotal,
+		  csrfmiddlewaretoken: '{{ csrf_token }}',
+		};
+  
+		$.ajax({
+		  url: '{% url "checkouts" %}', 
+		  method: 'POST',
+		  data: data,
+		  success: function(response) {
+			console.log(response);
+		  },
+		  error: function(error) {
+			console.error(error);
+		  },
+		});
+		window.location.href = "{% url 'checkout_view' %}";
+	  });
+	});
+  </script>	
+  
+  
+{% endblock %}

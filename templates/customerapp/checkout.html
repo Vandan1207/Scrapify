@@ -1,0 +1,77 @@
+{% extends "customerapp/master.html" %}
+{% load static %}
+{% block content %}
+	<!-- breadcrumb-section -->
+	<div class="breadcrumb-section breadcrumb-bg">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8 offset-lg-2 text-center">
+					<div class="breadcrumb-text">
+						<p>Fresh and Organic</p>
+						<h1>Check Out Product</h1>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end breadcrumb section -->
+
+	<!-- check out section -->
+	<div class="checkout-section mt-150 mb-150">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8">
+					<div class="checkout-accordion-wrap">
+						<div class="accordion" id="accordionExample">
+						  <div class="card single-accordion">
+						    <div class="card-header" id="headingOne">
+						      <h5 class="mb-0">
+						        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+						          Pickup Address
+						        </button>
+						      </h5>
+						    </div>
+
+						    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+						      <div class="card-body">
+						        <div class="billing-address-form">
+						        	<form method="POST">
+										{% csrf_token %}
+						        		<p><input type="text" name='name' placeholder="Name"></p>
+						        		<p><input type="email"name='email' placeholder="Email"></p>
+						        		<p><input type="text" name='city' placeholder="City"></p>
+						        		<p><input type="text" name='address' placeholder="Address"></p>
+						        		<p><input type="tel" name='phone'  placeholder="Phone Number"></p>
+						        		<p><input type="text" name='approxweight' placeholder="Aproxx Weight in kg"></p>
+										<p>
+											<select class="custom-select" name="timeslot" id="inputGroupSelect01">
+												<option value="1">8am - 10am</option>
+												<option value="2">10am - 12pm</option>
+												<option value="3">12pm - 2pm</option>
+												<option value="4">2pm - 4pm</option>
+												<option value="5">4pm - 6pm</option>
+												<option value="6">6pm - 8pm</option>
+											</select>
+											
+										</p>
+						        		<p>  <button type="submit" class="btn btn-primary" >Submit</button> </p> 
+						        	</form>
+						        </div>
+						      </div>
+						    </div>
+						  </div>
+						</div>
+
+					</div>
+				</div>
+
+				
+			</div>
+		</div>
+	</div>
+	<!-- end check out section -->
+
+	
+	
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+{% endblock %}

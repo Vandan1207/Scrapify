@@ -1,0 +1,42 @@
+{% extends "master.html" %}
+{%load static %}
+{%block content%}
+<div class="pagetitle">
+    <h1>Feedback</h1>
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+        <li class="breadcrumb-item active">Manage Feedback</li> 
+        
+
+      </ol>
+    </nav>
+  </div><!-- End Page Title -->
+{% for xy in data %}
+  <section class="section">
+    <div class="row">
+      <div class="col-lg-6">
+
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Feedback {{forloop.counter}}</h5>
+            
+
+            <!-- Default List group -->
+            <ul class="list-group">
+              <li class="list-group-item">{{xy.name}}</li>
+              <li class="list-group-item"> {{xy.email}} </li>
+              <li class="list-group-item"> {{xy.phone}} </li>
+              <li class="list-group-item"> {{xy.subject}} </li>
+              <li class="list-group-item"> {{xy.message}} </li>
+              <li class="list-group-item">  <button type="submit" > <a href="{% url 'deletefeedback' xy.id  %}"> Feedback Resolved  </a>  </button> </li>
+
+            </ul><!-- End Default List group -->
+
+          </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

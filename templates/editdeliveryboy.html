@@ -1,0 +1,75 @@
+{% extends 'master.html' %}
+{% load static%}
+{% block content %}
+    <div class="pagetitle">
+      <h1>Edit Delivery Boy</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index.html">Delivery Boy</a></li>
+          <li class="breadcrumb-item">Manage Delivery Boy</li>
+          <li class="breadcrumb-item active">Edit Delivery Boy</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section">
+      <div class="row">
+        <div class="col-lg-6">
+
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">General Form Elements</h5>
+
+              <!-- General Form Elements -->
+              <form method ="POST" action="/adminapp/updatedelivery/{{data.id}}/" >
+                {% csrf_token %}
+
+
+                <div class="row mb-3">
+                  <label for="inputText" class="col-sm-2 col-form-label">Name</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" name="name" value="{{data.name}}">
+                  </div>
+                  
+                  <label for="inputText" class="col-sm-2 col-form-label">Email</label>
+                  <div class="col-sm-10">
+                    <input type="email" class="form-control" name="email" value="{{data.email}}" >
+                  </div>
+                  <label for="inputText" class="col-sm-2 col-form-label">Address</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" name="address" value="{{data.address}}" >
+                  </div>
+                  <label for="inputText" class="col-sm-2 col-form-label">Phone Number</label>
+                  <div class="col-sm-10">
+                    <input type="phonenumber" class="form-control" name="phonenumber" value="{{data.phonenumber}}" >
+                  </div>
+                  <label for="inputText" class="col-sm-2 col-form-label">Adhar Card Number</label>
+                  <div class="col-sm-10">
+                    <input type="number" class="form-control" name="adharnumber" value="{{data.adharnumber}}" >
+                  </div>
+                </div>
+                
+                <div class="row mb-3">
+                  <label class="col-sm-2 col-form-label"></label>
+                  <div class="col-sm-10">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                  </div>
+                </div>
+
+              </form><!-- End General Form Elements -->
+
+            </div>
+          </div>
+
+        </div>
+               
+</form><!-- End General Form Elements -->
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  {% endblock %}

@@ -1,0 +1,70 @@
+{% extends "master.html" %}
+{% load static %}
+{% block content %}
+    <div class="pagetitle">
+      <h1>Show Category</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item">Delivery Boy</li>
+          <li class="breadcrumb-item active">Request Delivery Boy</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section">
+      <div class="row">
+        <div class="col-lg-12">
+
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Categories</h5>
+
+              <!-- Default Table -->
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Address</th>
+                    <th scope="col">Phone Number</th>
+                    <th scope="col">Adhar Card Number</th>
+                    <th scope="col">Photo</th>
+                    <th scope="col">Action</th>
+                    <th scope="col">Action</th>
+
+                  </tr>
+                </thead>  
+                <tbody>
+                  {% for xy in data %}
+                  <tr>
+                    <th scope="row">{{forloop.counter}}</th>
+                    <td>{{xy.name}}</td>
+                    <td>{{xy.email}}</td>
+                    <td>{{xy.address}}</td>
+                    <td>{{xy.phonenumber}}</td>
+                    <td><img src="{{xy.adharnumber.url}}" style="height:50px; "></td>
+                    <td><img src="{{xy.image.url}}" style="height:50px; "></td>
+
+                    <td>
+                       <button type="submit"> <a href= "{% url 'acceptdeliveryboy' xy.id %}">Accept</a></button> 
+                    </td>     
+                    <td>
+                        <button type="submit"><a href="">Delete</a></button>
+                    </td>     
+
+                  {% endfor %}
+
+                  </tr> 
+                  </tbody>
+                </table>
+
+                </table>
+              <!-- End Default Table Example -->
+            </div>
+          </div>
+
+    </section>
+
+ {% endblock %}

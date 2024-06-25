@@ -1,0 +1,102 @@
+
+{% load static %}
+
+<html lang="en">
+  <head>
+  	<title>Scrapify</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,700' rel='stylesheet' type='text/css'>
+
+	<link rel="stylesheet" href="{% static 'table/https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'%}">
+	
+	<link rel="stylesheet" href="{% static 'table/css/style.css'%}">
+
+	</head>
+	<body>
+		
+	<section class="ftco-section">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-md-6 text-center mb-12">
+					<h2 class="heading-section">Pending Order List</h2>
+					
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<div class="table-wrap">
+						<table class="table table-responsive-xl">
+						  <thead>
+						    <tr>
+						    	<th>ID</th>
+						      <th>Customer Name</th>
+						      <th>Phone Number</th>
+						      <th>City</th>
+						      <th>Address</th>
+						      <th>Time Slot</th>
+							  <th>Approx Weight</th>
+
+						    </tr>
+						  </thead>
+						  <tbody>
+                {% for xy in data %}
+                
+						    <tr class="alert" role="alert">
+						    	<td scope="row">
+						    		{{forloop.counter}}
+						    	</td>
+						      <td class="d-flex align-items-center">
+						      	<div class="pl-3 email">
+						      		<span>{{xy.checkout.name}}</span>
+						      		<span></span>	
+						      	</div>
+						      </td>
+
+						      <td>
+                                {{xy.checkout.phone}}
+				        	</td>
+							<td>{{xy.checkout.city}}</td>
+							<td>{{xy.checkout.city}}</td>
+							<td>{% if xy.checkout.timeslot == 1 %}8am to 10am {% elif xy.checkout.timeslot == 2 %}10am to 12pm {% elif xy.checkout.timeslot == 3 %}12pm to 2pm 
+                                {% elif xy.checkout.timeslot == 4 %}2pm to 4pm {% elif xy.checkout.timeslot == 5 %}4pm to 6pm {% elif xy.checkout.timeslot == 6 %}6pm to 8pm  {% endif %}  </td>
+							<td>{{xy.checkout.approxweight}}  KG</td>
+
+                  {% endfor %}
+						
+				  
+						  </tbody>
+						
+						
+						</table>
+				
+						
+					</div>
+			
+				</div>
+			
+				
+			</div>
+
+		
+		</div>
+		<section class="ftco-section">
+			<div class="container">
+				<div class="row justify-content-center">
+					<div class="col-md-6 text-center mb-12">
+						<h2 class="heading-section"><a href="{% url 'addshop' %}">Shop<a></h2>
+						
+					</div>
+				</div>
+
+		
+	</section>
+
+	<script src="{% static 'table/js/jquery.min.js'%}"></script>
+  <script src="{%static 'table/js/popper.js'%}"></script>
+  <script src="{%static 'table/js/bootstrap.min.js'%}"></script>
+  <script src="{% static 'table/js/main.js'%}"></script>
+
+	</body>
+</html>

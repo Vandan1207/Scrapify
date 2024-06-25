@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="globals.css" />
+    <link rel="stylesheet" href="styleguide.css" />
+    <link rel="stylesheet" href="{% static 'css/registerstyle.css' %}" />
+  </head>
+  <body>
+    <div class="register">
+      <div class="div">
+        <div class="registro-or-log-ing">
+          <div class="welcome-phrase"><div class="text-wrapper">Welcome to Scrapify</div></div>
+          <p class="p">Create an account and help make world a better place</p>
+          <div class="div-wrapper">
+            <div class="frame">
+              <div class="icono-google"><img class="img" src="{% static 'img/icono-google-3.png' %}" /></div>
+              <div class="text-wrapper-2">Continue with Google</div>
+            </div>
+          </div>
+          <div class="text-wrapper-3">or</div>
+          <form method="post">
+            {% csrf_token %}
+            <div class="div-wrapper">
+              <div class="div-wrapper"><input class="email" placeholder="Username" type="text" name="username" required ></div>
+            </div>
+            <div class="div-wrapper"><input class="password" placeholder="Password" type="password" name="password" /></div>
+            <div class="create-account">
+              <div class="create-account-2">
+                  <button type="submit">Create Account</button>
+              </div>
+            </div>
+          </form>
+          <div class="frame-2">
+            <div class="recuerdame-y-olvidar">
+              <div class="forgot-password"><div class="text-wrapper-4">Forgot Password?</div></div>
+            </div>
+            <p class="you-already-have">
+              <span class="span">You already have account?</span>
+              <span class="text-wrapper-5">&nbsp;</span>
+              <a href="../login/index.html"> <span class="text-wrapper-6"> Log in </span></a>
+            </p>
+          </div>
+        </div>
+        <div class="group">
+          <div class="group-2">
+            <div class="text-wrapper-7">Scrapify</div>
+            <img class="asset" src="{% static 'img/asset-21-2.svg' %}" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

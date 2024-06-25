@@ -1,0 +1,41 @@
+{% extends 'master.html' %}
+{% load static %}
+{% block content %}
+
+
+<h1>Pickup confirm details</h1>
+
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Delivery Boy Name</th>
+        <th scope="col">Scrap request user</th>
+        <th scope="col">Email</th>
+        <th scope="col">City</th>
+        <th scope="col">Phonenumber</th>
+        <th scope="col">Total</th>
+
+
+      </tr>
+    </thead>
+    <tbody>
+      {% for xy in data %}
+      <tr>
+        <th scope="row">{{forloop.counter}}</th>
+        <td>{{xy.user}}</td> 
+        <td>{{xy.name}}</td> 
+        <td>{{xy.email}}</td> 
+        <td>{{xy.address}}</td> 
+        <td>{{xy.phone}}</td> 
+        <td><b>Rs.</b>{{xy.final.total}}</td> 
+        <td>
+           <button type="submit"><a href="{% url 'ViewDetails' xy.id %}">View Details</a></button>
+        </td>      
+      {% endfor %}
+
+      </tr> 
+      </tbody> 
+    </table>
+
+{% endblock %}
